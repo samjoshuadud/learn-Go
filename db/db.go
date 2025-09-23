@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
 	_ "github.com/go-sql-driver/mysql"
+	"os"
 )
 
 
@@ -12,7 +13,20 @@ var DB *sql.DB
 
 func InitDB() {
 	var err error
-	dsn := "go_user:password@tcp(127.0.0.1:3306)/go_users"
+	
+	user := os.Getenv("DB_USER")
+	password := os.Getenv("DB_PASS")
+	host := os.Getenv("DB_HOST")
+	database := os.Getenv("DB_NAME")
+	port := os.Getenv("DB_PORT")
+	
+	if port == "" {
+		port = "3306"
+	}
+	dsn := fmt.Sprintf("%s:%s@tcp(%s)/%s", user, password, host+":"+port, database)
+
+	
+		
 
 	DB, err = sql.Open("mysql", dsn)
 
