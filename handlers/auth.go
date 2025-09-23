@@ -3,6 +3,7 @@ package handlers
 import (
 	"encoding/json"
 	"net/http"
+	"fmt"
 	
 	"time"
 	"os"
@@ -67,7 +68,7 @@ func Login(w http.ResponseWriter, r *http.Request) {
 
 	claims := &jwt.RegisteredClaims{
 		ExpiresAt: jwt.NewNumericDate(time.Now().Add(1 * time.Hour)),
-		Subject:   string(user.ID),
+		Subject:   fmt.Sprint(user.ID),
 	}
 
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
