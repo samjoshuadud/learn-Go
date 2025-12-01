@@ -26,12 +26,11 @@ func JWTMiddleware(next http.Handler) http.Handler {
 			return
 		}
 
-		secret := []byte(os.Getenv("JWT_SECRET"))
 		token, err := jwt.Parse(tokenString, func(token *jwt.Token) (interface{}, error) {
 			if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
 				return nil, fmt.Errorf("unexpected signing method")
 			}
-			return secret, nil
+			return jwtKey, nil
 		})
 
 		if err != nil || !token.Valid {
@@ -42,4 +41,3 @@ func JWTMiddleware(next http.Handler) http.Handler {
 		next.ServeHTTP(w, r)
 	})
 }
-

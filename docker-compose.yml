@@ -1,12 +1,10 @@
-version: "3.8"
-
 services:
   db:
     image: mariadb:latest
     container_name: mariadb
     restart: always
     environment:
-      MARIADB_ROOT_PASSWORD: ${DB_ROOT_PASS} 
+      MARIADB_ROOT_PASSWORD: ${DB_ROOT_PASSWORD} 
       MARIADB_DATABASE: ${DB_NAME}
       MARIADB_USER: ${DB_USER}
       MARIADB_PASSWORD: ${DB_PASS}

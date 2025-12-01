@@ -12,7 +12,6 @@ func SetupRoutes() *mux.Router {
 	
 	// Middlewares
 	r.Use(middleware.LoggingMiddleware)
-	// r.Use(middleware.AuthMiddleware)
 	r.Use(middleware.RecoverMiddleware)
 	r.Use(middleware.TimeoutMiddleware)
 	r.Use(middleware.RateLimitMiddleware)
